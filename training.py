@@ -75,10 +75,10 @@ with open('model.json', 'w') as json_file:
 model.save_weights('model.h5')
 
 # Plotting the model accuracy and loss
-# plt.plot(model_info.history['accuracy'])
-# plt.plot(model_info.history['val_accuracy'])
-# plt.title('Model Accuracy')
-# plt.ylabel('Accuracy')
-# plt.xlabel('Epoch')
-# plt.legend(['train', 'test'], loc='upper left')
-# plt.show()
+plt.plot(model_info.history['accuracy'])
+plt.plot(model_info.history['val_accuracy'])
+plt.title('Model Accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()

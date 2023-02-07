@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D, MaxPool2D
+from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D, MaxPool2D, BatchNormalization
 from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 from matplotlib import pyplot as plt
@@ -27,6 +27,8 @@ model = Sequential()
 model.add(Conv2D(filters=32, kernel_size=(3,3), activation='relu', input_shape=(48,48,1)))
 # 2nd Convolutional Layer
 model.add(Conv2D(filters=64, kernel_size=(3,3), activation='relu'))
+# batch normalization layer
+model.add(BatchNormalization())
 # Purpose of having this pooling layer is to reduce the spatial size of the representation to 
 # reduce the amount of parameters and computation in the network, and hence to also control overfitting.
 model.add(MaxPooling2D(pool_size=(2,2)))
@@ -35,10 +37,14 @@ model.add(Dropout(0.25))
 
 # 3rd Convolutional Layer
 model.add(Conv2D(filters=128, kernel_size=(3,3), activation='relu'))
+# batch normalization layer
+model.add(BatchNormalization())
 # pooling layer
 model.add(MaxPooling2D(pool_size=(2,2)))
 # 4th Convolutional Layer
 model.add(Conv2D(filters=128, kernel_size=(3,3), activation='relu'))
+# batch normalization layer
+model.add(BatchNormalization())
 # pooling layer
 model.add(MaxPooling2D(pool_size=(2,2)))
 # Dropout layer

@@ -1,4 +1,4 @@
-import { Tensor } from "onnxjs";
+import { Tensor } from "onnxruntime-web";
 // source: https://github.com/zsajjad/onnx-demo
 export function canvasToTensor(canvasId) {
 	var ctx = document.getElementById(canvasId).getContext("2d");
@@ -33,7 +33,7 @@ export function canvasToTensor(canvasId) {
 		}
 	}
 
-	const out = new Tensor(out_data, "float32", [n, c, h, w]);
+	const out = new Tensor("float32", out_data, [n, c, h, w]);
 
 	return out;
 }

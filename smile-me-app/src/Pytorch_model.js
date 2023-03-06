@@ -1,4 +1,4 @@
-import {Tensor, InferenceSession} from 'onnxjs';
+import {Tensor, InferenceSession} from 'onnxruntime-web';
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import './Pytorch_model.css'
@@ -22,9 +22,8 @@ const Pytorch_model = () => {
     let inferenceSession;
     const loadModel = async () => {
         // new InferenceSession({backendHint: 'webgl'}) for GPU use
-        inferenceSession = await new InferenceSession();
         try {
-            await inferenceSession.loadModel("./pytorch_model.onnx");
+            inferenceSession = await InferenceSession.create("./pytorch_model.onnx");
         } catch (error) {
             console.log("YEP ITS HHERE")
             console.log(error);

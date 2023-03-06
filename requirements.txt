@@ -1,7 +1,7 @@
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
 Markdown==3.3.4
-numpy==1.19.5=
+numpy==1.19.5
 opencv-python==4.5.1.48
 scipy==1.5.4
 tensorflow==2.4.1

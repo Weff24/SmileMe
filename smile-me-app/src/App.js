@@ -1,6 +1,7 @@
 import './App.css';
 import WebcamCapture from './WebcamCapture';
-import Pytorch_model from './Pytorch_model';
+import Pytorch_model_onnx from './Pytorch_model_onnx';
+import Pytorch_model_tfjs from './Pytorch_model_tfjs';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       
       <div className="content">
         {/* <WebcamCapture/> */}
-        <Pytorch_model/>
+        {/* <Pytorch_model_onnx/> */}
+        <Pytorch_model_tfjs/>
       </div>
 
       <footer className="App-footer">

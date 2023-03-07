@@ -1,14 +1,14 @@
-import { Tensor } from "onnxruntime-web";
+import * as tf from '@tensorflow/tfjs';
 // source: https://github.com/zsajjad/onnx-demo
 export function canvasToTensor(canvasId) {
 	var ctx = document.getElementById(canvasId).getContext("2d");
 
-	const n = 1;
-	const c = 3;
+	// const n = 64;
+	// const c = 3;
 	const h = ctx.canvas.height;
 	const w = ctx.canvas.width;
 
-	const out_data = new Float32Array(n * c * h * w);
+	const out_data = new Float32Array(h * w);
 
 	// load src context to a tensor
 	var srcImgData = ctx.getImageData(0, 0, w, h);
@@ -33,7 +33,7 @@ export function canvasToTensor(canvasId) {
 		}
 	}
 
-	const out = new Tensor("float32", out_data, [n, c, h, w]);
+	const out = tf.tensor(out_data, [1, h, w, 1], "float32");
 
 	return out;
 }

@@ -3,6 +3,7 @@ from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D, MaxPool2
 from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 from matplotlib import pyplot as plt
+import tensorflow as tf
 
 # Preprocessing the data
 train_data_cleaned = ImageDataGenerator(rescale = 1./255)
@@ -74,11 +75,12 @@ model_info = model.fit_generator(
     validation_steps = 7178 // 64)
 
 # Save the model
-model_json = model.to_json()
-with open('model.json', 'w') as json_file:
-    json_file.write(model_json)
+# model_json = model.to_json()
+# with open('model.json', 'w') as json_file:
+#     json_file.write(model_json)
 
-model.save_weights('model.h5')
+# model.save_weights('model.h5')
+tf.saved_model.save(model, './tf_saved_model')
 
 # Plotting the model accuracy and loss
 plt.plot(model_info.history['accuracy'])

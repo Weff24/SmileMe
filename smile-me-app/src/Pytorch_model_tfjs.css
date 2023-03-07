@@ -1,3 +1,7 @@
-.moodPrediction {
+.model_container {
     text-align: center;
+}
+
+video{
+    transform: scaleX(-1);
 }

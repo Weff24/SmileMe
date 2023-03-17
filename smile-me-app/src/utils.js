@@ -37,3 +37,15 @@ export function canvasToTensor(canvasId) {
 
 	return out;
 }
+
+export function argMax(array) {
+	let maxIndex = -1;
+	let maxValue = -1;
+	for(let i = 0; i < array.length; i++) {
+		if(array[i] > maxValue) {
+			maxIndex = i;
+			maxValue = array[i];
+		}
+	}
+	return maxIndex;
+}

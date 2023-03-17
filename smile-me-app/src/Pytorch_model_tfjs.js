@@ -22,7 +22,7 @@ const Pytorch_model_tfjs = () => {
     const hiddenCanvasRef = useRef();
     const displayCanvasRef = useRef();
     const [moodPrediction, setMoodPrediction] = useState();
-    const [faces, setFaces] = useState();
+    const [face, setFace] = useState();
 
     let moodModel;
     let faceDetector;
@@ -37,23 +37,35 @@ const Pytorch_model_tfjs = () => {
 
     function drawVideos() {
         const ctx1 = hiddenCanvasRef.current.getContext("2d");
-        // maybe delete these 2 lines later
-		// hiddenCanvasRef.current.width = moodModelInputSize;
-		// hiddenCanvasRef.current.height = moodModelInputSize;
 		ctx1.clearRect(0, 0, ctx1.canvas.width, ctx1.canvas.height);
         ctx1.drawImage(videoRef.current, 0, 0, moodModelInputSize, moodModelInputSize);
 
         const ctx2 = displayCanvasRef.current.getContext("2d");
-        // maybe delete these 2 lines later
-		// displayCanvasRef.current.width = displayCanvasWidth;
-		// displayCanvasRef.current.height = displayCanvasHeight;
 		ctx2.clearRect(0, 0, ctx2.canvas.width, ctx2.canvas.height);
         ctx2.drawImage(videoRef.current, 0, 0, displayCanvasWidth, displayCanvasHeight);
     }
 
     const runModels = async () => {
         if(videoRef.current != null) {
-            drawVideos();
+            const ctx2 = displayCanvasRef.current.getContext("2d");
+		    ctx2.clearRect(0, 0, ctx2.canvas.width, ctx2.canvas.height);
+            ctx2.drawImage(videoRef.current, 0, 0, displayCanvasWidth, displayCanvasHeight);
+            const estimationConfig = {flipHorizontal: true};
+            const face = await faceDetector.estimateFaces(displayCanvasRef.current, estimationConfig);
+            setFace(face);
+            const ctx1 = hiddenCanvasRef.current.getContext("2d");
+		    ctx1.clearRect(0, 0, ctx1.canvas.width, ctx1.canvas.height);
+            ctx1.drawImage(
+                displayCanvasRef.current, 
+                displayCanvasWidth - face[0]["box"]["xMax"], 
+                face[0]["box"]["yMin"],
+                face[0]["box"]["width"],
+                face[0]["box"]["height"], 
+                0, 
+                0, 
+                moodModelInputSize, 
+                moodModelInputSize
+            );
             const prediction_tensor = canvasToTensor("hiddenCanvas");
             const prediction = await moodModel.execute(prediction_tensor);
             const prediction_data = await prediction.data();
@@ -62,9 +74,7 @@ const Pytorch_model_tfjs = () => {
             // hiddenCanvasRef.current.width = displayCanvasWidth;
             // hiddenCanvasRef.current.height = displayCanvasHeight;
 
-            const estimationConfig = {flipHorizontal: true};
-            const faces = await faceDetector.estimateFaces(displayCanvasRef.current, estimationConfig);
-            setFaces(faces);
+            
         }
         setTimeout(runModels, 100);
     }
@@ -94,22 +104,23 @@ const Pytorch_model_tfjs = () => {
 	}, []);
 
     useEffect(() => {
-        if(faces != undefined && moodPrediction != undefined) {
+        if(face != undefined && moodPrediction != undefined) {
             const ctx = displayCanvasRef.current.getContext("2d");
             ctx.beginPath();
+            // for some reason the x position is flipped...? so
             ctx.rect(
-                faces[0]["box"]["xMin"], 
-                faces[0]["box"]["yMin"],
-                faces[0]["box"]["width"],
-                faces[0]["box"]["height"]
+                displayCanvasWidth - face[0]["box"]["xMax"], 
+                face[0]["box"]["yMin"],
+                face[0]["box"]["width"],
+                face[0]["box"]["height"]
             )
             ctx.stroke();
             ctx.font = "24px serif";
-            const xpos = (faces[0]["box"]["xMin"] + faces[0]["box"]["width"]) / 2
-            const ypos = faces[0]["box"]["yMax"] + 30;
+            const xpos = (displayCanvasWidth - face[0]["box"]["xMax"] + face[0]["box"]["width"]) / 2
+            const ypos = face[0]["box"]["yMax"] + 30;
             ctx.fillText(moodPrediction, xpos, ypos);
         }
-    }, [faces, moodPrediction])
+    }, [face, moodPrediction])
 
     return <div className='model_container'>
         <video autoPlay playsInline ref={videoRef}/>

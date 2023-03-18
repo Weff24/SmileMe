@@ -35,32 +35,25 @@ const Pytorch_model_tfjs = () => {
         faceDetector = await faceDetection.createDetector(faceModel, detectorConfig);
     };
 
-    function drawVideos() {
-        const ctx1 = hiddenCanvasRef.current.getContext("2d");
-		ctx1.clearRect(0, 0, ctx1.canvas.width, ctx1.canvas.height);
-        ctx1.drawImage(videoRef.current, 0, 0, moodModelInputSize, moodModelInputSize);
-
-        const ctx2 = displayCanvasRef.current.getContext("2d");
-		ctx2.clearRect(0, 0, ctx2.canvas.width, ctx2.canvas.height);
-        ctx2.drawImage(videoRef.current, 0, 0, displayCanvasWidth, displayCanvasHeight);
-    }
-
     const runModels = async () => {
         if(videoRef.current != null) {
             const ctx2 = displayCanvasRef.current.getContext("2d");
 		    ctx2.clearRect(0, 0, ctx2.canvas.width, ctx2.canvas.height);
+            ctx2.translate(displayCanvasWidth, 0);
+            ctx2.scale(-1,1);
             ctx2.drawImage(videoRef.current, 0, 0, displayCanvasWidth, displayCanvasHeight);
+            ctx2.setTransform(1,0,0,1,0,0);
             const estimationConfig = {flipHorizontal: true};
-            const face = await faceDetector.estimateFaces(displayCanvasRef.current, estimationConfig);
-            setFace(face);
+            const face_ouput = await faceDetector.estimateFaces(displayCanvasRef.current, estimationConfig);
+            setFace(face_ouput);
             const ctx1 = hiddenCanvasRef.current.getContext("2d");
 		    ctx1.clearRect(0, 0, ctx1.canvas.width, ctx1.canvas.height);
             ctx1.drawImage(
                 displayCanvasRef.current, 
-                displayCanvasWidth - face[0]["box"]["xMax"], 
-                face[0]["box"]["yMin"],
-                face[0]["box"]["width"],
-                face[0]["box"]["height"], 
+                displayCanvasWidth - face_ouput[0]["box"]["xMax"], 
+                face_ouput[0]["box"]["yMin"],
+                face_ouput[0]["box"]["width"],
+                face_ouput[0]["box"]["height"], 
                 0, 
                 0, 
                 moodModelInputSize, 
@@ -71,10 +64,6 @@ const Pytorch_model_tfjs = () => {
             const prediction_data = await prediction.data();
             const prediction_mood = moods[argMax(prediction_data)]
             setMoodPrediction(prediction_mood);
-            // hiddenCanvasRef.current.width = displayCanvasWidth;
-            // hiddenCanvasRef.current.height = displayCanvasHeight;
-
-            
         }
         setTimeout(runModels, 100);
     }
@@ -116,9 +105,11 @@ const Pytorch_model_tfjs = () => {
             )
             ctx.stroke();
             ctx.font = "24px serif";
-            const xpos = (displayCanvasWidth - face[0]["box"]["xMax"] + face[0]["box"]["width"]) / 2
+            const xmin = displayCanvasWidth - face[0]["box"]["xMax"];
+            const xpos = ((xmin + xmin + face[0]["box"]["width"]) / 2) - 30
             const ypos = face[0]["box"]["yMax"] + 30;
             ctx.fillText(moodPrediction, xpos, ypos);
+            ctx.setTransform(1,0,0,1,0,0);
         }
     }, [face, moodPrediction])
 

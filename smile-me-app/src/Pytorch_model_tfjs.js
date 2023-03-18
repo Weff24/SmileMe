@@ -31,6 +31,7 @@ const Pytorch_model_tfjs = () => {
         const faceModel = faceDetection.SupportedModels.MediaPipeFaceDetector;
         const detectorConfig = {
             runtime: 'tfjs',
+            maxFaces: 1
         };
         faceDetector = await faceDetection.createDetector(faceModel, detectorConfig);
     };
@@ -43,27 +44,32 @@ const Pytorch_model_tfjs = () => {
             ctx2.scale(-1,1);
             ctx2.drawImage(videoRef.current, 0, 0, displayCanvasWidth, displayCanvasHeight);
             ctx2.setTransform(1,0,0,1,0,0);
-            const estimationConfig = {flipHorizontal: true};
+            const estimationConfig = {flipHorizontal: false};
             const face_ouput = await faceDetector.estimateFaces(displayCanvasRef.current, estimationConfig);
             setFace(face_ouput);
-            const ctx1 = hiddenCanvasRef.current.getContext("2d");
-		    ctx1.clearRect(0, 0, ctx1.canvas.width, ctx1.canvas.height);
-            ctx1.drawImage(
-                displayCanvasRef.current, 
-                displayCanvasWidth - face_ouput[0]["box"]["xMax"], 
-                face_ouput[0]["box"]["yMin"],
-                face_ouput[0]["box"]["width"],
-                face_ouput[0]["box"]["height"], 
-                0, 
-                0, 
-                moodModelInputSize, 
-                moodModelInputSize
-            );
-            const prediction_tensor = canvasToTensor("hiddenCanvas");
-            const prediction = await moodModel.execute(prediction_tensor);
-            const prediction_data = await prediction.data();
-            const prediction_mood = moods[argMax(prediction_data)]
-            setMoodPrediction(prediction_mood);
+            if(face_ouput.length > 0) {
+                const ctx1 = hiddenCanvasRef.current.getContext("2d");
+                ctx1.clearRect(0, 0, ctx1.canvas.width, ctx1.canvas.height);
+                ctx1.drawImage(
+                    displayCanvasRef.current, 
+                    face_ouput[0]["box"]["xMin"], 
+                    face_ouput[0]["box"]["yMin"],
+                    face_ouput[0]["box"]["width"],
+                    face_ouput[0]["box"]["height"], 
+                    0, 
+                    0, 
+                    moodModelInputSize, 
+                    moodModelInputSize
+                );
+                const prediction_tensor = canvasToTensor("hiddenCanvas");
+                const prediction = await moodModel.execute(prediction_tensor);
+                const prediction_data = await prediction.data();
+                const prediction_mood = moods[argMax(prediction_data)]
+                setMoodPrediction(prediction_mood);
+            }
+            else {
+                setMoodPrediction(null);
+            }
         }
         setTimeout(runModels, 100);
     }
@@ -93,20 +99,19 @@ const Pytorch_model_tfjs = () => {
 	}, []);
 
     useEffect(() => {
-        if(face != undefined && moodPrediction != undefined) {
+        if(face != undefined && face.length > 0 &&  moodPrediction != undefined && moodPrediction != null) {
             const ctx = displayCanvasRef.current.getContext("2d");
             ctx.beginPath();
             // for some reason the x position is flipped...? so
             ctx.rect(
-                displayCanvasWidth - face[0]["box"]["xMax"], 
+                face[0]["box"]["xMin"], 
                 face[0]["box"]["yMin"],
                 face[0]["box"]["width"],
                 face[0]["box"]["height"]
             )
             ctx.stroke();
             ctx.font = "24px serif";
-            const xmin = displayCanvasWidth - face[0]["box"]["xMax"];
-            const xpos = ((xmin + xmin + face[0]["box"]["width"]) / 2) - 30
+            const xpos = ((face[0]["box"]["xMin"] + face[0]["box"]["xMin"] + face[0]["box"]["width"]) / 2) - 30
             const ypos = face[0]["box"]["yMax"] + 30;
             ctx.fillText(moodPrediction, xpos, ypos);
             ctx.setTransform(1,0,0,1,0,0);
@@ -117,7 +122,7 @@ const Pytorch_model_tfjs = () => {
         <video autoPlay playsInline ref={videoRef}/>
         <canvas id='hiddenCanvas' className='hiddenCanvas' ref={hiddenCanvasRef} width={moodModelInputSize} height={moodModelInputSize}/>
         <canvas className='displayCanvas' ref={displayCanvasRef} width={displayCanvasWidth} height={displayCanvasHeight}/>
-        <h3 className='moodPrediction'>Mood: {moodPrediction}</h3>
+        <h3 className='moodPrediction'>{moodPrediction != null ? "Mood: " + moodPrediction : "No face detected :("}</h3>
     </div>
 }
 

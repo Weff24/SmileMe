@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 mp_face_detection = mp.solutions.face_detection
 face_detection = mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.8)
 mp_drawing = mp.solutions.drawing_utils
-first_time = True
 
 def main():
     cwd = os.getcwd()
@@ -22,13 +21,10 @@ def main():
     )
 
 def createImagesInDir(inp_dir, out_dir):
-    global iterations, first_time
     os.mkdir(out_dir)
     os.chdir(out_dir)
     for filename in os.listdir(inp_dir):
         print("FILE NAME IS: " + str(filename))
-        if iterations > 20:
-            return
         file_path = os.path.join(inp_dir, filename)
         print("FILE PATH IS " + str(file_path))
         if os.path.isfile(file_path):
@@ -36,17 +32,14 @@ def createImagesInDir(inp_dir, out_dir):
             if image is None:
                 print("UNABLE TO READ IMAGE: " + str(filename))
                 continue
-            if first_time:
-                cv2.imshow("First image pre-cropped", image)
-                cv2.waitKey(0)
             # Convert the BGR image to RGB and process it with MediaPipe Face Detection.
             results = face_detection.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
             # Draw face detections of each face.
             if not results.detections:
                 print("NO FACE FOUND FOR IMAGE AT PATH: " + str(file_path))
-                cv2.imshow("NO FACE FOUND FOR THIS IMAGE", image)
-                cv2.waitKey(0)
+                # cv2.imshow("NO FACE FOUND FOR THIS IMAGE", image)
+                # cv2.waitKey(0)
                 continue
             image_height = image.shape[0]
             image_width = image.shape[1]
@@ -59,13 +52,8 @@ def createImagesInDir(inp_dir, out_dir):
             ymin = getWithinBounds(ymin, 0, image_height)
             ymax = getWithinBounds(ymax, 0, image_height)
             cropped_image = image[ymin:ymax, xmin:xmax]
-            if first_time:
-                cv2.imshow("First image post-crop", cropped_image)
-                cv2.waitKey(0)
-                first_time = False
             cv2.imwrite(filename, cropped_image)
             print("successfully made and stored new image!")
-            iterations += 1
         elif os.path.isdir(file_path):
             createImagesInDir(file_path, os.path.join(out_dir, filename))
 

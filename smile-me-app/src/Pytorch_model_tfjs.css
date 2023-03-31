@@ -1,0 +1,16 @@
+.model_container {
+    text-align: center;
+}
+
+video{
+    /* transform: scaleX(-1); */
+    display: none;
+}
+
+.hiddenCanvas {
+    display: none;
+}
+
+.displayCanvas {
+    /* transform: scaleX(-1); */
+}

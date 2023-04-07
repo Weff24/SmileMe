@@ -69,10 +69,10 @@ model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.0001, decay=1
 # Fit the model
 model_info = model.fit_generator(
     train_generator,
-    steps_per_epoch = 28709 // 64,
+    steps_per_epoch = 26837 // 64,
     epochs = 50, # reduce this if you have limited computational power
     validation_data = test_generator,
-    validation_steps = 7178 // 64)
+    validation_steps = 6482 // 64)
 
 # Save the model
 # model_json = model.to_json()

@@ -38,8 +38,8 @@ def createImagesInDir(inp_dir, out_dir):
             # Draw face detections of each face.
             if not results.detections:
                 print("NO FACE FOUND FOR IMAGE AT PATH: " + str(file_path))
-                # cv2.imshow("NO FACE FOUND FOR THIS IMAGE", image)
-                # cv2.waitKey(0)
+                cv2.imshow("NO FACE FOUND FOR THIS IMAGE", image)
+                cv2.waitKey(0)
                 continue
             image_height = image.shape[0]
             image_width = image.shape[1]

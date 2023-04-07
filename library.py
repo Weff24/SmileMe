@@ -6,7 +6,7 @@ import torch
 if torch.cuda.is_available():
     device = 'gpu'
     gpu_id = 0
-else:
+else:ra
     device = 'cpu'
     gpu_id = None
 

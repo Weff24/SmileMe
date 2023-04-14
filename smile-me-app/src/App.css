@@ -20,6 +20,14 @@
   color: #131313;
 }
 
+.title a{
+  text-decoration:none;
+}
+
+.title a:link, .title a:visited{
+  color:black;
+}
+
 .subtitle {
   margin-top: 0;
   font-size: 2rem;
@@ -52,8 +60,8 @@
 .header-contributors {
   font-size: 20px;
   margin-bottom: 50px;
-  color: #ba67f1;
-  text-shadow: 2px 2px #a702f9;
+  /* color: #ba67f1;
+  text-shadow: 2px 2px #a702f9; */
 }
 
 .navbar{
@@ -87,4 +95,10 @@
 
 .about_title{
   text-align:center;
+}
+
+.about_description{
+  width:60%;
+  margin:auto;
+  font-size:1.1rem;
 }

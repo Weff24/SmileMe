@@ -16,7 +16,7 @@ const Pytorch_model_tfjs = () => {
     const displayCanvasWidth = 640;
     const displayCanvasHeight = 480;
     
-    const moods = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"};
+    const moods = {0: "Angry", 1: "Fearful", 2: "Happy", 3: "Neutral", 4: "Sad", 5: "Surprised"};
 
     const videoRef = useRef(null);
     const hiddenCanvasRef = useRef();
@@ -27,7 +27,7 @@ const Pytorch_model_tfjs = () => {
     let moodModel;
     let faceDetector;
     const loadModel = async () => {
-        moodModel = await loadGraphModel('tf_saved_model_tfjs/model.json');
+        moodModel = await loadGraphModel('tfjs_transformed_images_model_v1/model.json');
         const faceModel = faceDetection.SupportedModels.MediaPipeFaceDetector;
         const detectorConfig = {
             runtime: 'tfjs',

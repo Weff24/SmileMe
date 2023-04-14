@@ -27,7 +27,7 @@ const Pytorch_model_tfjs = () => {
     let moodModel;
     let faceDetector;
     const loadModel = async () => {
-        moodModel = await loadGraphModel('tfjs_transformed_FER2013_model_v1/model.json');
+        moodModel = await loadGraphModel('tfjs_transformed_images_model_v1/model.json');
         const faceModel = faceDetection.SupportedModels.MediaPipeFaceDetector;
         const detectorConfig = {
             runtime: 'tfjs',

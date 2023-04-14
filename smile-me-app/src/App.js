@@ -84,15 +84,28 @@ export default App;
 
 //       <div className="content">
 //         {challengeIndex === 0 && (
-//           <WebcamCapture onEmotionDetected={handleEmotionDetected} />
+//           // <WebcamCapture onEmotionDetected={handleEmotionDetected} />
+//           <div>
+//             <Pytorch_model_tfjs/>
+//             <button onClick={handleNextChallenge}>Next Challenge</button>
+//           </div>
 //         )}
 
 //         {challengeIndex === 1 && (
-//           <HappyPage
-//             isEmotionDetected={!!emotion}
-//             emotion={emotion}
-//             onNextChallenge={handleNextChallenge}
-//           />
+//           <div>
+//             <h2>Sad Page</h2>
+//             <p>Make your face look sad!</p>
+//             {emotion === 'sad' && (
+//               <div>
+//                 <HappyPage
+//                   isEmotionDetected={!!emotion}
+//                   emotion={emotion}
+//                   onNextChallenge={handleNextChallenge}
+//                 />
+//                 <button onClick={handleNextChallenge}>Next Challenge</button>
+//               </div>
+//             )}
+//           </div>
 //         )}
 
 //         {challengeIndex === 2 && (
@@ -172,6 +185,11 @@ export default App;
 //       </div>
 //     </div>
 //   );}
+// export default App;
+
+
+
+
 
 
 // function FirstPage() {
@@ -191,4 +209,3 @@ export default App;
 // }
 
 // export default FirstPage;
-//   // export default App;

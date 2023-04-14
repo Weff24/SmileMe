@@ -24,7 +24,7 @@ import Pytorch_model_tfjs from './Pytorch_model_tfjs';
 //           <a href="https://www.linkedin.com/in/shaopeng-frank-gu-73b369221/">Jeffrey Wu</a>,
 //           <a href="https://www.linkedin.com/in/shaopeng-frank-gu-73b369221/">Andy Dong</a>,
 //           <a href="https://www.linkedin.com/in/shaopeng-frank-gu-73b369221/">Frank Gu</a>,
-//           <a href="https://www.linkedin.com/in/shaopeng-frank-gu-73b369221/">Mitch Weng</a>,
+//           <a href="https://www.linkedin.com/in/mitch-weng-178724232/">Mitch Weng</a>,
 //           <a href="https://www.linkedin.com/in/isaacsun1/">Isaac Sun</a>,
 //           <a href="https://www.linkedin.com/in/shaopeng-frank-gu-73b369221/">Minseo Kim</a>,
 //           <a href="https://www.linkedin.com/in/shaopeng-frank-gu-73b369221/">Tina Chen</a>

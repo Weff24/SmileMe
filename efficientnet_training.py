@@ -37,7 +37,7 @@ model = tf.keras.models.Model(model_ft.input, x)
 # model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.AdamW(lr=0.0001), metrics=['accuracy'])
 
 # Compiling the model
-model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.0001, decay=1e-6), metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0001, decay=1e-6), metrics=['accuracy'])
 
 # Fit the model
 model_info = model.fit_generator(

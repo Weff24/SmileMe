@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  /* padding: 2rem; */
 }
 
 .title {
@@ -54,4 +54,37 @@
   margin-bottom: 50px;
   color: #ba67f1;
   text-shadow: 2px 2px #a702f9;
+}
+
+.navbar{
+  padding:1rem;
+  background-color:#df99f5;
+}
+
+.navbar .menu{
+  text-align:center;
+}
+
+.navbar li{
+  display:inline;
+  position:relative;
+  font-family: "Nunito", sans-serif;
+  padding: 6px;
+  margin-right:50px;
+}
+
+.navbar .menu i:hover, .navbar li:hover a{
+  color:dimgray;
+}
+
+.navbar .menu a{
+  position: relative;
+  text-decoration: none; 
+  color:black;
+  font-size: 20px;
+  /* bottom:2px; */
+}
+
+.about_title{
+  text-align:center;
 }

@@ -18,7 +18,7 @@ function App() {
       <nav class = "navbar">
         <ul class="nav-links">
             <div class="menu">
-              <li><a href="/">Demo</a></li> 
+              <li><a href="main.js">Home</a></li>
               <li><a href="about.js">About</a></li>
               <li><a href="game.js">Game</a></li>      
               <li><a href="contact.js">Contact</a></li>

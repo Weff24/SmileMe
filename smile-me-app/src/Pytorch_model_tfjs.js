@@ -9,14 +9,16 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import './Pytorch_model_tfjs.css'
 import { canvasToTensor, argMax } from './utils';
 
-const Pytorch_model_tfjs = () => {
+
+
+const Pytorch_model_tfjs = ({onEmotionDetected}) => {
     tf.setBackend('webgl');
 
     const moodModelInputSize = 48;
     const displayCanvasWidth = 640;
     const displayCanvasHeight = 480;
     
-    const moods = {0: "Angry", 1: "Fearful", 2: "Happy", 3: "Neutral", 4: "Sad", 5: "Surprised"};
+    const moods = {0: "angry", 1: "fearful", 2: "happy", 3: "neutral", 4: "sad", 5: "surprised"};
 
     const videoRef = useRef(null);
     const hiddenCanvasRef = useRef();
@@ -116,7 +118,10 @@ const Pytorch_model_tfjs = () => {
             ctx.fillText(moodPrediction, xpos, ypos);
             ctx.setTransform(1,0,0,1,0,0);
         }
-    }, [face, moodPrediction])
+        if (moodPrediction){
+            onEmotionDetected(moodPrediction.toLowerCase());
+        }
+    }, [face, moodPrediction,onEmotionDetected])
 
     return <div className='model_container'>
         <video autoPlay playsInline ref={videoRef}/>
@@ -127,3 +132,4 @@ const Pytorch_model_tfjs = () => {
 }
 
 export default Pytorch_model_tfjs;
+

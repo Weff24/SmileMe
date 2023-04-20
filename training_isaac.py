@@ -6,6 +6,40 @@ from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from keras.applications import VGG16
 from matplotlib import pyplot as plt
 
+def create_vgg_like_model(input_shape=(48, 48, 1)):
+    model = Sequential()
+
+    # Block 1
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=input_shape))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    # Block 2
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    # Block 3
+    model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    # Block 4
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    # Block 5
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    return model
+
+
 # Data preprocessing and augmentation
 train_data_gen = ImageDataGenerator(rescale=1./255,
                                     rotation_range=20,
@@ -31,17 +65,22 @@ test_generator = test_data_gen.flow_from_directory(
 # Building the model
 model = Sequential()
 
-# Using a pre-trained VGG16 model
-base_model = VGG16(include_top=False, input_shape=(48, 48, 1))
-for layer in base_model.layers:
-    layer.trainable = False
+# Using a custom VGG-like model for grayscale images
+base_model = create_vgg_like_model()
 model.add(base_model)
 
 # Adding custom layers on top
 model.add(Flatten())
+model.add(BatchNormalization())
 model.add(Dense(256, activation='relu'))
+model.add(BatchNormalization())
 model.add(Dropout(0.5))
+model.add(BatchNormalization())
 model.add(Dense(7, activation='softmax'))
+model.add(BatchNormalization())
+
+model.add(Dense(7, activation='relu'))
+
 
 # Compiling the model
 model.compile(loss='categorical_crossentropy', 

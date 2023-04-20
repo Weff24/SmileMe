@@ -18,15 +18,16 @@ function App() {
       <nav class = "navbar">
         <ul class="nav-links">
             <div class="menu">
-              <li><a href="about.js">about</a></li>
-              <li><a href="game.js">game</a></li>      
-              <li><a href="contact.js">contact</a></li>
+              <li><a href="main.js">Home</a></li>
+              <li><a href="about.js">About</a></li>
+              <li><a href="game.js">Game</a></li>      
+              <li><a href="contact.js">Contact</a></li>
             </div>   
         </ul>
       </nav>
 
       <header className="App-header">
-        <h1 className="title"><a href="/">Smile Me</a></h1>
+        <h1 className="title"><a href="/">SmileMe</a></h1>
         <h2 className="subtitle">IEEE ML Team</h2>
       </header>
 

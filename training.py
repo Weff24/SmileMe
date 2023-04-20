@@ -6,16 +6,16 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 
 # Preprocessing the data
-train_data_cleaned = ImageDataGenerator(rescale = 1./255, rotation_range=10, width_shift_range=0.1, height_shift_range=0.1)
-test_data_cleaned = ImageDataGenerator(rescale = 1./255, rotation_range=10, width_shift_range=0.1, height_shift_range=0.1)
+train_data_cleaned = ImageDataGenerator(rescale = 1./255, rotation_range=20, horizontal_flip=True)
+test_data_cleaned = ImageDataGenerator(rescale = 1./255, rotation_range=20, horizontal_flip=True)
 train_generator = train_data_cleaned.flow_from_directory(
-    'images_cropped/train',
+    'combined_images/train',
     target_size = (48, 48),
     batch_size = 64,
     color_mode = 'grayscale',
     class_mode = 'categorical')
 test_generator = test_data_cleaned.flow_from_directory(
-    'images_cropped/validation',
+    'combined_images/test',
     target_size = (48, 48),
     batch_size = 64,
     color_mode = 'grayscale',
@@ -69,10 +69,10 @@ model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.0001, decay=1
 # Fit the model
 model_info = model.fit_generator(
     train_generator,
-    steps_per_epoch = 40616 // 64,
-    epochs = 50, # reduce this if you have limited computational power
+    steps_per_epoch = 35612 // 64,
+    epochs = 125, # reduce this if you have limited computational power
     validation_data = test_generator,
-    validation_steps = 6590 // 64)
+    validation_steps = 9115 // 64)
 
 # Save the model
 # model_json = model.to_json()
@@ -80,7 +80,7 @@ model_info = model.fit_generator(
 #     json_file.write(model_json)
 
 # model.save_weights('model.h5')
-tf.saved_model.save(model, './transformed_images_model_v1')
+tf.saved_model.save(model, './combined_images_model_v4')
 
 # Plotting the model accuracy and loss
 plt.plot(model_info.history['accuracy'])

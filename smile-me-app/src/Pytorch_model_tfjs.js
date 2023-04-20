@@ -27,7 +27,7 @@ const Pytorch_model_tfjs = () => {
     let moodModel;
     let faceDetector;
     const loadModel = async () => {
-        moodModel = await loadGraphModel('tfjs_transformed_images_model_v1/model.json');
+        moodModel = await loadGraphModel('tfjs_combined_images_model_v2/model.json');
         const faceModel = faceDetection.SupportedModels.MediaPipeFaceDetector;
         const detectorConfig = {
             runtime: 'tfjs',
@@ -63,7 +63,9 @@ const Pytorch_model_tfjs = () => {
                 );
                 const prediction_tensor = canvasToTensor("hiddenCanvas");
                 const prediction = await moodModel.execute(prediction_tensor);
+                // console.log(prediction);
                 const prediction_data = await prediction.data();
+                console.log(prediction_data);
                 const prediction_mood = moods[argMax(prediction_data)]
                 setMoodPrediction(prediction_mood);
             }

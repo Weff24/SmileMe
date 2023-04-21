@@ -2,6 +2,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D, MaxPool2D, BatchNormalization
 from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import EarlyStopping
 from matplotlib import pyplot as plt
 import tensorflow as tf
 
@@ -34,7 +35,7 @@ model.add(BatchNormalization())
 # reduce the amount of parameters and computation in the network, and hence to also control overfitting.
 model.add(MaxPooling2D(pool_size=(2,2)))
 # Dropout layer avoids overfitting by randomly dropping units (along with their connections) from the neural network during training.
-model.add(Dropout(0.25))
+model.add(Dropout(0.4))
 
 # 3rd Convolutional Layer
 model.add(Conv2D(filters=128, kernel_size=(3,3), activation='relu'))
@@ -43,6 +44,14 @@ model.add(BatchNormalization())
 # pooling layer
 model.add(MaxPooling2D(pool_size=(2,2)))
 # 4th Convolutional Layer
+model.add(Conv2D(filters=128, kernel_size=(3,3), activation='relu'))
+# batch normalization layer
+model.add(BatchNormalization())
+# pooling layer
+model.add(MaxPooling2D(pool_size=(2,2)))
+# Dropout layer
+model.add(Dropout(0.25))
+# 5th Convolutional Layer
 model.add(Conv2D(filters=128, kernel_size=(3,3), activation='relu'))
 # batch normalization layer
 model.add(BatchNormalization())
@@ -66,13 +75,17 @@ model.add(Dense(6, activation='softmax'))
 # Compiling the model
 model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.0001, decay=1e-6), metrics=['accuracy'])
 
+# implement early stopping to prevent overfitting
+early_stopping = EarlyStopping(patience=7, verbose=1)
+
 # Fit the model
 model_info = model.fit_generator(
     train_generator,
     steps_per_epoch = 35612 // 64,
-    epochs = 125, # reduce this if you have limited computational power
+    epochs = 100, # reduce this if you have limited computational power
     validation_data = test_generator,
-    validation_steps = 9115 // 64)
+    validation_steps = 9115 // 64, 
+    callbacks=[early_stopping])
 
 # Save the model
 # model_json = model.to_json()
@@ -80,7 +93,7 @@ model_info = model.fit_generator(
 #     json_file.write(model_json)
 
 # model.save_weights('model.h5')
-tf.saved_model.save(model, './combined_images_model_v4')
+tf.saved_model.save(model, './combined_images_model_v7')
 
 # Plotting the model accuracy and loss
 plt.plot(model_info.history['accuracy'])

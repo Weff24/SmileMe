@@ -212,3 +212,8 @@
   text-align:center;
   width:150px;
 }
+.images {
+  justify-content: center;
+  text-align: center;
+  /* display: block; */
+}

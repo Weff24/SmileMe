@@ -102,3 +102,9 @@
   margin:auto;
   font-size:1.1rem;
 }
+
+.images {
+  justify-content: center;
+  text-align: center;
+  /* display: block; */
+}

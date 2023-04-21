@@ -29,7 +29,7 @@ const Pytorch_model_tfjs = ({onEmotionDetected}) => {
     let moodModel;
     let faceDetector;
     const loadModel = async () => {
-        moodModel = await loadGraphModel('tfjs_combined_images_model_v2/model.json');
+        moodModel = await loadGraphModel('tfjs_combined_images_model_v3/model.json');
         const faceModel = faceDetection.SupportedModels.MediaPipeFaceDetector;
         const detectorConfig = {
             runtime: 'tfjs',
@@ -121,7 +121,7 @@ const Pytorch_model_tfjs = ({onEmotionDetected}) => {
             ctx.setTransform(1,0,0,1,0,0);
         }
         if (moodPrediction){
-            onEmotionDetected(moodPrediction.toLowerCase());
+            onEmotionDetected(moodPrediction.toLowerCase(), videoRef.current);
         }
     }, [face, moodPrediction,onEmotionDetected])
 
@@ -129,7 +129,7 @@ const Pytorch_model_tfjs = ({onEmotionDetected}) => {
         <video autoPlay playsInline ref={videoRef}/>
         <canvas id='hiddenCanvas' className='hiddenCanvas' ref={hiddenCanvasRef} width={moodModelInputSize} height={moodModelInputSize}/>
         <canvas className='displayCanvas' ref={displayCanvasRef} width={displayCanvasWidth} height={displayCanvasHeight}/>
-        <h3 className='moodPrediction'>{moodPrediction != null ? "Mood: " + moodPrediction : "No face detected :("}</h3>
+        <h3 className='moodPrediction'>{moodPrediction != null ? "Current Mood: " + moodPrediction : "No face detected"}</h3>
     </div>
 }
 

@@ -4,9 +4,9 @@ import './App.css';
 const Contact = () => {
   return (
     <div class = "contact_title">
-        <h2>
-        Meet the Team
-      </h2>
+        <h2 class = "meet">
+            Meet the Team:
+        </h2>
       <br></br>
 
       <div class = "contact">

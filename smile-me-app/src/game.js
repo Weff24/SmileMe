@@ -33,7 +33,7 @@ const Game = () => {
   };
 
   return (
-    <div className="game_content">
+    <div className="game_title">
         <h2>
         Game
         </h2>

@@ -4,8 +4,14 @@ import Pytorch_model_tfjs from './Pytorch_model_tfjs';
   
 const Main = () => {
   return (
-    <div className="content">
-       <h2>
+    <div className="Content">
+       <header className="App-header">
+        <h1 className="title"><a href="/">SmileMe</a></h1>
+        <h2 className="subtitle">IEEE ML Team</h2>
+      </header>
+      <div className = "content">
+
+      <h2>
        A Facial Emotion Recognition App
       </h2>
       <div class = "about_description">
@@ -23,6 +29,8 @@ const Main = () => {
         <div class="game_but">
           <a href="game.js" class="btn btn-primary d-block" role="button"><button class="btn">Play Game</button></a>
         </div>
+      </div>
+
       </div>
 
     </div>

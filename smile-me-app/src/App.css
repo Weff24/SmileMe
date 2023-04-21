@@ -6,6 +6,12 @@
   background-color: #fff;
 }
 
+.App{
+  background-image: url(https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1200&fit=crop&crop=faces);
+  background-size: cover;
+  background-position: center center;
+}
+
 .App-header {
   display: flex;
   flex-direction: column;
@@ -16,10 +22,15 @@
 
 .App-header h1{
   position:relative;
+  padding-top:3rem;
 }
 
 .App-header h2{
   position:relative;
+}
+
+.App-footer{
+  bottom:0%;
 }
 
 .title {
@@ -53,15 +64,6 @@
   padding: 2rem;
   text-align:center;
   position: relative;
-  /* background-image: url(../../images/train/angry/0.jpg); */
-  /* background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center; */
-}
-
-.contact{
-  /* border-style:solid; */
-  margin-bottom:-20px;
 }
 
 .game_content{
@@ -75,7 +77,7 @@
   position: relative;
 }
 
-.game_content .instruct{
+.game_title .instruct{
   padding-bottom:5px;
 }
 
@@ -95,15 +97,11 @@
 .header-contributors {
   font-size: 20px;
   margin-bottom: 50px;
-  /* color: #ba67f1;
-  text-shadow: 2px 2px #a702f9; */
 }
 
 .navbar{
   padding:1rem;
   background-color:#df99f5;
-  /* #df99f5;
-  B3A8E0 */
 }
 
 .nav-links{
@@ -118,7 +116,7 @@
 }
 
 .navbar li{
-  display:inline;
+  display:inline-block;
   position:relative;
   font-family: "Nunito", sans-serif;
   padding: 6px;
@@ -137,8 +135,9 @@
   /* bottom:2px; */
 }
 
-.about_title{
+.about_title, .contact_title, .game_title{
   text-align:center;
+  padding-top:3%;
 }
 
 .about_description{
@@ -147,13 +146,6 @@
   margin:auto;
   font-size:1.1rem;
   text-align:center;
-  /* border-style: solid; */
-}
-
-.contact_title{
-  position:relative;
-  text-align:center;
-  /* padding-top: 2rem; */
 }
 
 .demo_but, .game_but{
@@ -167,6 +159,16 @@
 
 .btn {
   min-width: 110px;
+}
+
+.menu{
+  margin:auto;
+}
+.logo{
+  padding-left:3%;
+  padding-top:5px;
+  /* hopefully is ok */
+  position:absolute;
 }
 
 .head_shot, .ind_desc{
@@ -215,5 +217,8 @@
 .images {
   justify-content: center;
   text-align: center;
-  /* display: block; */
+}
+
+.meet{
+  padding-bottom:10px;
 }

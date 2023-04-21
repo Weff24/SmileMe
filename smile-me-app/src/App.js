@@ -14,8 +14,10 @@ import Contact from './contact';
 function App() {
   return (
     <div className="App">
-
       <nav class = "navbar">
+        <div class = "logo">
+          <a href="/"><img src="./headshots/2.png"  width = "100px"/></a>
+        </div>
         <ul class="nav-links">
             <div class="menu">
               <li><a href="/">Home</a></li> 
@@ -26,11 +28,6 @@ function App() {
         </ul>
       </nav>
 
-      <header className="App-header">
-        <h1 className="title"><a href="/">SmileMe</a></h1>
-        <h2 className="subtitle">IEEE ML Team</h2>
-      </header>
-
       <Router>
         <Routes>
           <Route path='/' element={<Main/>} />
@@ -40,7 +37,6 @@ function App() {
         </Routes>
       </Router>
       
-
 
       <footer className="App-footer">
          <p>&copy; 2023 IEEE ML Team. All rights reserved.</p>

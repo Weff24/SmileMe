@@ -26,9 +26,16 @@ const Game = () => {
   };
 
   return (
-    <div className="content">
+    <div className="game_content">
+        <h2>
+        Game
+        </h2>
+        <div class = "instruct">
+            Instructions: Try to match the mood of the target emotion using SmileMe! Each correct mood match is one point.
+        </div>
       <h2>
-        Target emotion: {targetEmotions[targetIndex]}{" "}
+        <br></br>
+        Target Emotion: {targetEmotions[targetIndex]}{" "}
         {emotionEmojis[targetEmotions[targetIndex]]}
       </h2>
       <h2>Score: {score}</h2>

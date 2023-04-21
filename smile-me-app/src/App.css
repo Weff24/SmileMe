@@ -1,3 +1,4 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 .App {
   display: flex;
   flex-direction: column;
@@ -11,6 +12,14 @@
   align-items: center;
   justify-content: center;
   /* padding: 2rem; */
+}
+
+.App-header h1{
+  position:relative;
+}
+
+.App-header h2{
+  position:relative;
 }
 
 .title {
@@ -42,6 +51,32 @@
   justify-content: center;
   flex-grow: 1;
   padding: 2rem;
+  text-align:center;
+  position: relative;
+  /* background-image: url(../../images/train/angry/0.jpg); */
+  /* background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center; */
+}
+
+.contact{
+  /* border-style:solid; */
+  margin-bottom:-20px;
+}
+
+.game_content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  /* padding-top:1rem; */
+  text-align:center;
+  position: relative;
+}
+
+.game_content .instruct{
+  padding-bottom:5px;
 }
 
 .App-footer {
@@ -67,10 +102,19 @@
 .navbar{
   padding:1rem;
   background-color:#df99f5;
+  /* #df99f5;
+  B3A8E0 */
+}
+
+.nav-links{
+  margin:auto;
 }
 
 .navbar .menu{
+  position:relative;
   text-align:center;
+  padding-top:10px;
+  padding-bottom:10px;
 }
 
 .navbar li{
@@ -98,7 +142,73 @@
 }
 
 .about_description{
+  position:relative;
   width:60%;
   margin:auto;
   font-size:1.1rem;
+  text-align:center;
+  /* border-style: solid; */
+}
+
+.contact_title{
+  position:relative;
+  text-align:center;
+  /* padding-top: 2rem; */
+}
+
+.demo_but, .game_but{
+  padding:20px;
+}
+
+.demo_but .btn, .game_but .btn{
+  border-color:#df99f5 !important;
+  background-color: #df99f5 !important;
+}
+
+.btn {
+  min-width: 110px;
+}
+
+.head_shot, .ind_desc{
+  position:relative;
+  display:inline-block;
+  width:150px;
+  height:150px;
+}
+
+.head_shot{
+  position:relative;
+  bottom:50px;
+}
+
+.head_shot img{
+  object-fit: fill;
+}
+
+.member, .first_row, .second_row{
+  position:relative;
+  display:inline-block;
+}
+
+.member{
+  padding:5px;
+}
+
+.ind_desc a{
+  position: relative;
+  text-decoration: none; 
+  color:black;
+  padding:8px;
+  font-size: 30px;
+  bottom:2px;
+}
+
+.ind_desc a:hover{
+  color:dimgray;
+}
+
+.ind_desc p{
+  font-size:12px;
+  text-align:center;
+  width:150px;
 }

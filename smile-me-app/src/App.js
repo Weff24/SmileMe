@@ -5,7 +5,7 @@ import Pytorch_model_onnx from './Pytorch_model_onnx';
 import Pytorch_model_tfjs from './Pytorch_model_tfjs';
 
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import About from './about';
+import Demo from './demo';
 import Game from './game';
 import Main from './main';
 import Contact from './contact';
@@ -18,8 +18,8 @@ function App() {
       <nav class = "navbar">
         <ul class="nav-links">
             <div class="menu">
-              <li><a href="/">Demo</a></li> 
-              <li><a href="about.js">About</a></li>
+              <li><a href="/">Home</a></li> 
+              <li><a href="demo.js">Demo</a></li>
               <li><a href="game.js">Game</a></li>      
               <li><a href="contact.js">Contact</a></li>
             </div>   
@@ -34,15 +34,13 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Main/>} />
-          <Route path='/about.js' element={<About/>} />
+          <Route path='/about.js' element={<Demo/>} />
           <Route path='/game.js' element={<Game/>} />
           <Route path='/contact.js' element={<Contact/>} />
         </Routes>
       </Router>
       
-      <div className="content">
-        {/* <Pytorch_model_tfjs/> */}
-      </div>
+
 
       <footer className="App-footer">
          <p>&copy; 2023 IEEE ML Team. All rights reserved.</p>

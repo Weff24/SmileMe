@@ -18,7 +18,7 @@ const Main = () => {
 
       <div class = "btn-group">
         <div class="demo_but">
-          <a href="about.js" class="btn btn-primary d-block" role="button"><button class="btn">Try the Demo</button></a>
+          <a href="demo.js" class="btn btn-primary d-block" role="button"><button class="btn">Try the Demo</button></a>
         </div>
         <div class="game_but">
           <a href="game.js" class="btn btn-primary d-block" role="button"><button class="btn">Play Game</button></a>

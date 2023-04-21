@@ -13,7 +13,7 @@ const Contact = () => {
         <div class = "first-row">
             <div class = "member">
                 <div class = "head_shot">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "150px"></img>
+                    <img src="./headshots/jeffrey.jpg" width = "150px"></img>
                 </div>
                 <div class = "ind_desc">
                     <b>Jeffrey Wu</b><br></br> 
@@ -24,7 +24,7 @@ const Contact = () => {
             </div>
             <div class = "member">
                 <div class = "head_shot">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "150px"></img>
+                    <img src="./headshots/andy.jpg" width = "150px"></img>
                 </div>
                 <div class = "ind_desc">
                     <b>Andy Dong</b><br></br> 
@@ -35,7 +35,7 @@ const Contact = () => {
             </div>
             <div class = "member">
                 <div class = "head_shot">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "150px"></img>
+                    <img src="./headshots/frank.jpg" width = "150px"></img>
                 </div>
                 <div class = "ind_desc">
                     <b>Frank Gu</b><br></br> 
@@ -49,7 +49,7 @@ const Contact = () => {
         <div class = "second-row">
         <div class = "member">
                 <div class = "head_shot">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "150px"></img>
+                    <img src="./headshots/mitch.jpg" width = "150px"></img>
                 </div>
                 <div class = "ind_desc">
                     <b>Mitch Weng</b><br></br> 
@@ -60,7 +60,7 @@ const Contact = () => {
             </div>
             <div class = "member">
                 <div class = "head_shot">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "150px"></img>
+                    <img src="./headshots/isaac.jpg" width = "150px"></img>
                 </div>
                 <div class = "ind_desc">
                     <b>Isaac Sun</b><br></br> 
@@ -75,14 +75,14 @@ const Contact = () => {
                 </div>
                 <div class = "ind_desc">
                     <b>Minseo Kim</b><br></br> 
-                    <p>CS & Psych at Northwestern University</p>
+                    <p>Student at Northwestern University</p>
                     <a href="https://www.linkedin.com/in/minseo-kim-b84986215/" target="_blank"><i class="fa fa-linkedin-square"></i></a>
                     <a href="mailto: minseo2003@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a>
                 </div>
             </div>
             <div class = "member">
                 <div class = "head_shot">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "150px"></img>
+                    <img src="./headshots/tina.jpg" width = "150px"></img>
                 </div>
                 <div class = "ind_desc">
                     <b>Tina Chen</b><br></br> 

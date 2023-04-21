@@ -29,7 +29,7 @@ const Pytorch_model_tfjs = ({onEmotionDetected}) => {
     let moodModel;
     let faceDetector;
     const loadModel = async () => {
-        moodModel = await loadGraphModel('tfjs_combined_images_model_v3/model.json');
+        moodModel = await loadGraphModel('tfjs_combined_images_model_v5/model.json');
         const faceModel = faceDetection.SupportedModels.MediaPipeFaceDetector;
         const detectorConfig = {
             runtime: 'tfjs',

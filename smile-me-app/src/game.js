@@ -7,6 +7,7 @@ const emotionEmojis = {
   happy: "😃",
   sad: "😢",
   fearful: "😱",
+  neutral: "😐"
 };
 const canvasWidth = 640;
 const canvasHeight = 480;

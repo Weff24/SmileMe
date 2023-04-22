@@ -29,7 +29,7 @@ const Game = () => {
         setScore((prevScore) => prevScore + 1); // Use functional form
         setTargetIndex(Math.floor(Math.random()*targetEmotions.length)); // Use functional form
         setIsDelaying(false);
-      }, 500);
+      }, 2000);
     }
   };
 

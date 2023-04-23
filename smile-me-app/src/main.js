@@ -10,7 +10,7 @@ const Main = () => {
         <h2 className="subtitle">IEEE ML Team</h2>
       </header>
       <div className = "content">
-
+      <img src="IMG_0215.png" width= "600px" style={{"marginBottom": "30px", "border": "1px solid black"}}/>
       <h2>
        A Facial Emotion Recognition App
       </h2>
